@@ -1,7 +1,10 @@
 ## Data Download 9/10/26
 downloaded from: https://huggingface.co/datasets/Anthropic/EconomicIndex
+
 using: hf download Anthropic/EconomicIndex --repo-type=dataset
+
 version: release 1-6
+
 license: CC-BY 4.0
 
 citation: 
