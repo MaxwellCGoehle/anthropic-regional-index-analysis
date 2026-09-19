@@ -72,3 +72,43 @@ As pointed out earlier we have 2 very strong AUI outliers in DC and Utah therefo
 ## What is next based on the exploratory analysis 
 
 Add in other economic/population data besides what currently resides such as occupation employment and wages, census industry mix etc. Research into Utah is this simply a coincidence based on one week of data is this a recurring thing across releases is there a reasonable explanation or is there something misleading happening. Handling sample sizes for small population and conversation states, a threshold of 100 conversation minimum is applied but breaking smaller states down to categories loses almost all information. Is 100 a reasonable minimum or should this be adjusted. 
+
+
+## States or Countries
+
+The same metrics exist at both state and country level.
+
+![states vs countries](figures/exploratory_figures/states_vs_countries.png)
+
+| | states | countries |
+| --- | --- | --- |
+| geographies with usage | 51 | 172 |
+| with a per capita index | 51 | 166 |
+| with an automation share | 51 | 158 |
+| median index | 0.70 | 0.73 |
+| index range | 0.21 - 3.82 | 0.01 - 7.00 |
+| median automation | 48.2 | 54.6 |
+| automation middle half | 46.1 - 49.9 | 49.8 - 60.3 |
+| median conversations | 1,811 | 583 |
+| lower quartile conversations | 639 | 93 |
+| index vs gdp | 0.68 | 0.75 |
+
+| highest | index | conversations |
+| --- | --- | --- |
+| ISR | 7.00 | 10,941 |
+| MCO | 4.93 | 25 |
+| SGP | 4.57 | 5,375 |
+| AUS | 4.10 | 18,753 |
+| NZL | 4.05 | 3,647 |
+
+| lowest | index | conversations |
+| --- | --- | --- |
+| TKM | 0.01 | 18 |
+| NER | 0.02 | 71 |
+| TCD | 0.02 | 67 |
+| BDI | 0.03 | 59 |
+| GIN | 0.04 | 77 |
+
+Countries have a larger sample size and variation, roughly three times the observations with a much wider spread in adoption. The median country has 583 conversations against 1,811 for the median state and a quarter of countries sit under 93. Thin samples also break the automation measure, any mode under 15 conversations gets pooled into not_classified so a small country can be left with only its most common mode. The other tradeoff is outside data, the US has occupational and census data that is easy to join where countries would need World Bank equivalents. Going with countries for the larger sample and wider variation, the extremes look worth digging into as well. 
+
+Numbers calculated in states_vs_countries.py, included small sample size countries on purpose since it is an important distinction from states and in favor of aggregating across releases. 
