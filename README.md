@@ -6,3 +6,6 @@ Created by Maxwell Goehle for VCU Data Science Capstone Fall 2026 semester.
 
 Week 2:
 States vs Countries exploring, with findings located in Profile.md
+
+Week 3 + 4:
+Explore outside sources: Github and World Bank data findings reported in Profile.md

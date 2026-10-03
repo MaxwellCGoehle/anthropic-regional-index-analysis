@@ -112,3 +112,44 @@ The same metrics exist at both state and country level.
 Countries have a larger sample size and variation, roughly three times the observations with a much wider spread in adoption. The median country has 583 conversations against 1,811 for the median state and a quarter of countries sit under 93. Thin samples also break the automation measure, any mode under 15 conversations gets pooled into not_classified so a small country can be left with only its most common mode. The other tradeoff is outside data, the US has occupational and census data that is easy to join where countries would need World Bank equivalents. Going with countries for the larger sample and wider variation, the extremes look worth digging into as well. 
 
 Numbers calculated in states_vs_countries.py, included small sample size countries on purpose since it is an important distinction from states and in favor of aggregating across releases. 
+
+## Outside Data
+
+Looking at World Bank Data and Github Data, a small exploratory analysis seeing what is available and how well it does in predicting adoption(correlations are spearman).
+
+| variable | source | matched out of 172 | index | automation | conversations |
+| --- | --- | --- | --- | --- | --- |
+| developers_per_100k | github | 164 | 0.95 | -0.71 | 0.34 |
+| gdp_per_capita | world bank | 165 | 0.87 | -0.65 | 0.18 |
+| internet_pct | world bank | 164 | 0.74 | -0.65 | 0.27 |
+| tertiary_enrollment | world bank | 142 | 0.74 | -0.76 | 0.46 |
+| services_employment_pct | world bank | 153 | 0.74 | -0.59 | 0.20 |
+| urban_pct | world bank | 165 | 0.58 | -0.47 | 0.25 |
+| gini_index | world bank | 132 | -0.39 | 0.43 | -0.18 |
+| population | world bank | 165 | -0.26 | -0.08 | 0.78 |
+
+The developer correlation pops out at 0.95 ahead of GDP. Some of that is overlap between the 2 populations, but it does mean that developer work may represent a stronger connection that simply economic data.
+
+A big takeaway is the automation column is all negative meaning everything that raises adoption also lowers automation which in turn should increase augmentation but could just increase unclassified, something to dig into further.
+
+Population obviously correlates highly to conversations, but not to index and automation so population doesnt translate to how things are used.
+
+Below are comparing countries developer base not population, only countries with more than 100 conversations are included here. A ratio above 1.0 is higher than would be expected and below 1 is lower than to be expected. This could mean more non-technical usage, something to explore further.
+
+| most usage per developer | ratio | conversations |
+| --- | --- | --- |
+| ISR | 2.43 | 10,941 |
+| KOR | 2.32 | 35,285 |
+| MOZ | 2.18 | 453 |
+| LAO | 2.15 | 381 |
+| SEN | 1.99 | 828 |
+
+| least | ratio | conversations |
+| --- | --- | --- |
+| UZB | 0.28 | 479 |
+| BGD | 0.37 | 3,318 |
+| MNG | 0.44 | 178 |
+| KGZ | 0.51 | 276 |
+| SGP | 0.54 | 5,375 |
+
+Numbers from outside_sources_explore.py
