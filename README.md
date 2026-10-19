@@ -9,3 +9,6 @@ States vs Countries exploring, with findings located in Profile.md
 
 Week 3 + 4:
 Explore outside sources: Github and World Bank data findings reported in Profile.md
+
+Week 5 + 6:
+Declared research question and created a baseline based on one release

@@ -153,3 +153,66 @@ Below are comparing countries developer base not population, only countries with
 | SGP | 0.54 | 5,375 |
 
 Numbers from outside_sources_explore.py
+
+## Non-Technical Usage
+
+Claude is mostly spoken about as a technical tool but I wanted to focus on the split of technical vs non-technical. The split varies from 23% to 50% non-technical share depending on the country.
+
+Occupations come from the SOC groups the release reports, classified off the task conversation rather than the user's job. Non technical means anything that is not computer, science or production work as defined by SOC groups.
+
+Getting a comparable number was difficult, groups too small to report get pooled into not_classified, so small countries are often left with only computer work and read as 0% non technical. I kept the 28 countries that report at least ten groups, and since they do not all report the same ten, I compared them only on the eight that they all share. That drops the correlation with sample size from 0.80 to 0.35. Later releases aggregate by month instead of by week so I expect this to be much less of an issue.
+
+| most non technical | share | automation | conversations |
+| --- | --- | --- | --- |
+| IDN | 50.3 | 54.7 | 18,030 |
+| JPN | 49.9 | 43.3 | 35,298 |
+| AUS | 49.6 | 46.0 | 18,753 |
+| PER | 49.5 | 52.6 | 5,060 |
+| ISR | 48.7 | 46.0 | 10,941 |
+| KOR | 48.4 | 44.5 | 35,285 |
+| USA | 48.1 | 49.1 | 208,200 |
+| BRA | 48.1 | 63.9 | 35,482 |
+
+| least non technical | share | automation | conversations |
+| --- | --- | --- | --- |
+| TUR | 23.0 | 54.1 | 10,402 |
+| PAK | 28.0 | 64.1 | 9,264 |
+| IND | 28.2 | 58.3 | 68,964 |
+| VNM | 31.9 | 53.2 | 10,651 |
+| UKR | 32.4 | 51.8 | 6,122 |
+| MYS | 34.8 | 49.8 | 4,881 |
+| ESP | 35.1 | 50.4 | 10,582 |
+| POL | 35.7 | 46.2 | 9,972 |
+
+Across the 28 countries here, 43.1% of usage is non technical work, though it ranges from 23% in Turkey to 50% in Indonesia.
+
+Non-technical usage features many countries with strong economies that are strong regardless of sectors. Israel is worth pointing at, it has the highest per capita adoption of any country in the dataset and a high non technical share. 
+
+| what goes with a higher non technical share | spearman |
+| --- | --- |
+| services_employment_pct | 0.30 |
+| gdp_per_capita | 0.23 |
+| developers_per_100k | 0.15 |
+| tertiary_enrollment | 0.05 |
+
+None of these predictors are really strong and that points to a gap in coverage, overall claude usage was predicted extremely well with simply the amount of developers per 100k people, non-technical usage is not as easy.
+
+Numbers from non_technical_usage.py.
+
+## Research Question + Whats Next
+
+What share of a countries Claude usage is non-technical work, what predicts this share, and how does it change across releases.
+
+The goal behind this reserch question is to focus specifically on the non-technical side of Claude's usage and how it is spread along with its adoption across releases. 
+
+This produces an interesting question because technical usage is tied heavily to the developer share in a country as proven above however non technical usage does not have quite an obvious predictor. ILOSTAT produces employment by ISCO occupation for 148 countries that join will be next. 
+
+Comparing across releases is vital to see not only how addoption is increasing or decreasing but to validate the research beyond a one week sample size.
+
+Main limit currently is only 28 countries currently pass the thresholds to be included. I am optimistic in later releases where aggregation is done by month and not week this is less of an issue.
+
+## Hypothesis 
+
+I expect non-technical share to increase as usage continues to expand beyond just developers. I am expecting most of this usage to come in countries that already feature a larger share of non-technical usage and for the gap between the highest and lowest non-techincal usage to increase across releases.
+
+I expect a countries ICT employment share to predict its non-technical share better than gdp or other current measures however I still expect the correlation to be low. I think a complex model will be needed and with only a small number of countries it may be difficult to prevent overfitting.
