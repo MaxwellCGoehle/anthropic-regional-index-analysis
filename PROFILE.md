@@ -211,8 +211,54 @@ Comparing across releases is vital to see not only how addoption is increasing o
 
 Main limit currently is only 28 countries currently pass the thresholds to be included. I am optimistic in later releases where aggregation is done by month and not week this is less of an issue.
 
-## Hypothesis 
+## Rebuilding Occupation Shares (v3-v5)
 
-I expect non-technical share to increase as usage continues to expand beyond just developers. I am expecting most of this usage to come in countries that already feature a larger share of non-technical usage and for the gap between the highest and lowest non-techincal usage to increase across releases.
+Numbers come from src/rebuild_occupation_shares.py
 
-I expect a countries ICT employment share to predict its non-technical share better than gdp or other current measures however I still expect the correlation to be low. I think a complex model will be needed and with only a small number of countries it may be difficult to prevent overfitting.
+Only the v3 enriched file publishes the Occupation Shares(soc_pct). I rebuilt the logic used in v3 enriched, following Anthropic's v3 preprocessing notebook, to stretch across the 3 releases. Each O*NET task is matched to its SOC group through the task statements file.
+
+The rebuilt v3 matches to Anthropic's v3 enriched numbers exactly(718 rows, max difference 0.0000). Each task also matched an O*NET task statement 0.0% non-matching rate across the 3 releases.
+
+1 change I made for future analysis is each task can be assigned to multiple major groups. The way v3 enriched handles this is just allowing each conversation to be counted multiple times. I wanted each conversation to weigh the same so I divided the weight of the conversation evenly between its groups. The splitting shared tasks moved shares: 0.007 % points on average, and a maximum of 0.238 % points at most in v3.
+
+| Release | Countries with 200+ conversations | Countries with at least one occupation group | Countries with 10+ occupation groups |
+|---|---|---|---|
+| v3 | 115 | 111 | 28 |
+| v4 | 118 | 115 | 30 |
+| v5 | 117 | 116 | 31 |
+
+To compare across releases I use a basket strategy talked about previously. I use the 24 countries that clear the 10 group cut across all three releases, and use the 7 that each of them reports in every release: 2 technical (Computer and Mathematical; Life, Physical, and Social Science) and 5 non-technical( Arts, Design, Entertainment, Sports, and Media; Community and Social Service; Educational Instruction and Library; Office and Administrative Support; Sales and Related). Production has dropped out because it was missing for at least one of the passing countries in at least one release.
+
+## Research Question 
+
+What explains the differences in non-technical share of Claude usage across countries, and does that share shift across releases?
+
+The focus has shifted to explaining the differences between countries much less obvious than overall adoption which was explained by number of developers. v6 publishes the occupation major groups directly and aggregates by month so it contains more than the 28 that pass the cut in v3-v5. v6 will be the test dataset and v3-v5 will be used to see changes over time. 
+
+## Hypotheses
+
+**Hypothesis 1: Non-Technical usage increases from v3 to v5**
+- H0: Median difference in non-technical usage share is 0
+- H1: Median difference in non-technical usage share is not zero(predicting an increase)
+- Wilcoxon signed-rank test on the 24 paired countries, using alpha = 0.05
+
+**Hypothesis 2: ICT employment share is correlated with non-technical share**
+- H0:ρ = 0
+- H1:ρ ≠ 0
+- Spearman coefficient on v6(May 2026), alpha = 0.05
+- predicting negative, but no v3 value to go off of
+
+**Hypothesis 3: Services employment share is correlated with non-techincal share**
+- H0:ρ = 0
+- H1:ρ ≠ 0
+- Spearman coefficient on v6(May 2026), alpha = 0.05
+- predicting positive, ρ=0.30 in v3
+
+## Limiting Factors
+
+- v3-v5 only covers the 24 countries with the most usage, smaller usage countries are not covered in this portion of the analysis, v6 will have a larger corpus.
+- The basket only uses 7 of the possible 22 groups.
+- v6 may assign differently to v3, and may not use the method I hav chosen for splitting tasks with multiple groups, but only 0.007 points on average difference.
+
+
+

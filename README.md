@@ -12,3 +12,6 @@ Explore outside sources: Github and World Bank data findings reported in Profile
 
 Week 5 + 6:
 Declared research question and created a baseline based on one release
+
+Week 7 + 8:
+Rebuilt non-technical logic across releases 3-5, and created hypothesis to test.
