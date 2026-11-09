@@ -286,7 +286,8 @@ Most of the increase came from the increase in v3 to v4: 8.054, with v4 to v5 ha
 | Community and Social Service | 1.81| Non-Tech |
 | Arts, Design, Entertainment, Sports, and Media | 3.25 | Non-Tech |
 
-![H1](figures/result_figures/h1_slope.png)
+<img src="figures/result_figures/h1_slope.png" width="550">
+
 Each gray line is a countries change, the blue represents the median across countries.
 
 The rise among all of the non-technical groups suggest a major shift into non-technical usage. This could be a change in how Anthropic labeled data between v3 and v4, or seasonality from August to November. There was no one group that held the entire change which makes seasonality less likely however these causes cannot be ruled out. 
