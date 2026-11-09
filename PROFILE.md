@@ -261,4 +261,42 @@ The focus has shifted to explaining the differences between countries much less 
 - v6 may assign differently to v3, and may not use the method I hav chosen for splitting tasks with multiple groups, but only 0.007 points on average difference.
 
 
+## Hypotheses Results
 
+Numbers come from src/hypotheses_tests.py
+
+**Hypothesis 1: Non-Technical usage increases from v3 to v5**
+- The Wilcoxon Result yielded a statistic of 0.0 and a p-value of 1.19 x 10^-7, therefore the null hypothesis is rejected and can conclude there was a Non-Technical usage increase from v3 to v5. The median increase for each country within the basket from v3 to v5 was 8.561. The medians were:
+
+| Release | Non-Tech % |
+|---|---|
+| v3 | 42.54 |
+| v4 | 51.13 |
+| v5 | 52.15 |
+
+Most of the increase came from the increase in v3 to v4: 8.054, with v4 to v5 having an increase of: 0.506. From v3 to v4 all 24 countries increased, from v4 to v5 14/24 countries increased. The majority of the jump came from the August to November release. Both Technical groups fell the median increase for each group was as follows:
+
+| Group | Median Change | Tech/Non-Tech |
+|---|---|---|
+| Computer and Mathematical | -6.63| Tech |
+| Life, Physical, and Social Science | -1.70 | Tech |
+| Office and Administrative Support | 0.70 | Non-Tech |
+| Sales and Related | 1.77 | Non-Tech |
+| Educational Instruction and Library | 1.79 | Non-Tech |
+| Community and Social Service | 1.81| Non-Tech |
+| Arts, Design, Entertainment, Sports, and Media | 3.25 | Non-Tech |
+
+![H1](figures/result_figures/h1_slope.png)
+Each gray line is a countries change, the blue represents the median across countries.
+
+The rise among all of the non-technical groups suggest a major shift into non-technical usage. This could be a change in how Anthropic labeled data between v3 and v4, or seasonality from August to November. There was no one group that held the entire change which makes seasonality less likely however these causes cannot be ruled out. 
+
+
+**Hypothesis 2: ICT employment share is correlated with non-technical share**
+- Hypothesis 2 not yet tested, will be tested next week
+
+
+**Hypothesis 3: Services employment share is correlated with non-techincal share**
+- H3 yielded ρ = 0.335, and a p-value = 0.000184, with n = 120. Therefore we reject the null hypothesis and conclude that there is a positive relationship between services employment share and non-technical share. V3 found a ρ = 0.30 on 28 countries, v6 finds a ρ = 0.335. V6 was used for this hypothesis since there are more countries that fit the criteria since aggregation is done by month. This relationship however is moderate not strong, and it may overlap with GDP as countries that are richer tend to have a higher service employment share. 
+
+When Production is excluded ρ = 0.39, but production is considered a technical category just not in the basket for v3-v5.
