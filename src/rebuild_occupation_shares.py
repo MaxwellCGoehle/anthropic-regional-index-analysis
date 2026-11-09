@@ -144,3 +144,12 @@ print(f"\nbasket of {len(basket)} groups")
 print("technical:", sorted(basket & set(technical)))
 print("non-technical:", sorted(basket - set(technical)))
 print(f"countries clearing the cut in all three releases: {len(panel)}")
+
+
+#Save the basket outputs for hypotheses tests
+#Creates one table with 72 rows, with 7 group columns, release, and geo_id
+panel_tables = []
+for release, table in qualified.items():
+    panel_tables.append(table.loc[sorted(panel), sorted(basket)].assign(release=release))
+
+pd.concat(panel_tables).to_csv(data_path / "basket_shares.csv")
