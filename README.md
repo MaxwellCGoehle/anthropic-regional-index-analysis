@@ -15,3 +15,6 @@ Declared research question and created a baseline based on one release
 
 Week 7 + 8:
 Rebuilt non-technical logic across releases 3-5, and created hypothesis to test.
+
+Week 9:
+Test H1, H3 and comment on results.
